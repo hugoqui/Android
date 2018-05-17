@@ -27,7 +27,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
         </activity>
-        <activity android:name=".Listview"></activity>
+        <activity android:name=".Listview" />
+        <activity android:name=".TripDetailsActivity"></activity>
     </application>
 
 </manifest>

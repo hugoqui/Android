@@ -7,22 +7,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class CustomAdapter extends BaseAdapter {
     Context context;
-    String titles[];
-    String subTitles[];
-    LayoutInflater inflter;
+    ArrayList<JSONObject> trips;
+    public LayoutInflater inflter;
 
-    public CustomAdapter(Context applicationContext, String[] _titles, String[] _subTitles) {
+    public CustomAdapter(Context applicationContext, ArrayList<JSONObject> _trips) {
         this.context = applicationContext;
-        this.titles = _titles;
-        this.subTitles = _subTitles;
+        this.trips = _trips;
         inflter = (LayoutInflater.from(applicationContext));
     }
 
     @Override
     public int getCount() {
-        return titles.length;
+        return trips.size();
     }
 
     @Override
@@ -40,8 +44,19 @@ public class CustomAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.activity_listview, null);
         TextView title = view.findViewById(R.id.textTitle);
         TextView subTitle = view.findViewById(R.id.textDescription);
-        title.setText(titles[i]);
-        subTitle.setText(subTitles[i]);
+
+        String destination = "";
+        String origin = "";
+
+        try {
+             origin = trips.get(i).getString("Title");
+             destination = trips.get(i).getString("Destination");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        title.setText(destination);
+        subTitle.setText(origin);
         return view;
 
     }

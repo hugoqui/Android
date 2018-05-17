@@ -20,10 +20,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String  Registered_UserName = "com.example.myfirstapp.MESSAGE";
+    public static final String Registered_UserName = "com.example.myfirstapp.MESSAGE";
+    public static final String UserId = "";
+
     TextView errorMessage;
     String url ="http://eztrip.azurewebsites.net/api/trips/getusername/";
     RequestQueue queue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         // Display the first 500 characters of the response string.
                         try {
-                            letAccess(response.getString("Name"));
+                            letAccess(response.getString("Name"), response.getString("Id"));
                         } catch (JSONException e) {
                             errorMessage.setText("Error en datos.");
                             e.printStackTrace();
@@ -64,10 +67,11 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(jsonRequest);
     }
 
-    private void letAccess (String msg){
+    private void letAccess (String msg, String Id){
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         String message = msg;
         intent.putExtra(Registered_UserName, message);
+        intent.putExtra(UserId, Id);
         startActivity(intent);
     }
 

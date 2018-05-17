@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/listLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,19 +9,31 @@
     <TextView
         android:id="@+id/textTitle"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:padding="10dp"
-        android:textColor="@color/colorPrimaryDark" />
+        android:padding="6dp"
+        android:text="Origen"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/textDescription"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="49dp"
+
         android:layout_gravity="center"
         android:baselineAligned="false"
-        android:paddingRight="50dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="8dp" />
+        android:text="Destino"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="17dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#324160" />
+
 
 </LinearLayout>
