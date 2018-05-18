@@ -13,14 +13,13 @@
 
         <TextView
             android:id="@+id/textTitle"
-            android:layout_width="243dp"
-            android:layout_height="39dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:padding="6dp"
             android:text="Origen"
             android:textAlignment="center"
@@ -29,11 +28,11 @@
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textDate" />
 
         <TextView
             android:id="@+id/textDescription"
-            android:layout_width="242dp"
+            android:layout_width="0dp"
             android:layout_height="26dp"
 
             android:layout_gravity="center"
@@ -41,7 +40,6 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:baselineAligned="false"
             android:text="Destino"
             android:textAlignment="center"
@@ -57,7 +55,7 @@
             android:layout_height="4dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="TextView"
+            android:text=""
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textDescription" />
@@ -76,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="92dp" />
+            app:layout_constraintGuide_begin="119dp" />
 
         <TextView
             android:id="@+id/textInicial"
@@ -87,7 +85,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="V"
             android:textAlignment="center"
@@ -98,6 +96,26 @@
             app:layout_constraintBottom_toBottomOf="@+id/idText"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textDate"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#8c8d94"
+            android:gravity="right"
+            android:padding="4dp"
+            android:text="10/05/2018"
+
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>

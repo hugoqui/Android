@@ -46,6 +46,7 @@ public class CustomAdapter extends BaseAdapter {
         TextView title = view.findViewById(R.id.textTitle);
         TextView subTitle = view.findViewById(R.id.textDescription);
         TextView idTrip = view.findViewById(R.id.idText);
+        TextView tvDate = view.findViewById(R.id.textDate);
 
         int[] androidColors = view.getResources().getIntArray(R.array.androidcolors);
         int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
@@ -57,11 +58,13 @@ public class CustomAdapter extends BaseAdapter {
         String origin = "";
         String id = "";
         String inicial ="";
+        String  _date ="";
         try {
              origin = trips.get(i).getString("Title");
              destination = trips.get(i).getString("Destination");
              id = trips.get(i).getString("Id");
-             inicial = trips.get(i).getString("ClientId").substring(0,1);
+             inicial = trips.get(i).getString("ClientId").substring(0,2);
+             _date = trips.get(i).getString("PickupDate").substring(0,10);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -69,6 +72,7 @@ public class CustomAdapter extends BaseAdapter {
         title.setText(destination);
         subTitle.setText(origin);
         idTrip.setText(id);
+        tvDate.setText(_date);
         return view;
 
     }
