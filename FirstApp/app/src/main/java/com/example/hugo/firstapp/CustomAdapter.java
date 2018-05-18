@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CustomAdapter extends BaseAdapter {
     Context context;
@@ -44,19 +45,30 @@ public class CustomAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.activity_listview, null);
         TextView title = view.findViewById(R.id.textTitle);
         TextView subTitle = view.findViewById(R.id.textDescription);
+        TextView idTrip = view.findViewById(R.id.idText);
+
+        int[] androidColors = view.getResources().getIntArray(R.array.androidcolors);
+        int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
+        TextView tvInicial = view.findViewById(R.id.textInicial);
+        tvInicial.setBackgroundColor(randomAndroidColor);
+
 
         String destination = "";
         String origin = "";
-
+        String id = "";
+        String inicial ="";
         try {
              origin = trips.get(i).getString("Title");
              destination = trips.get(i).getString("Destination");
+             id = trips.get(i).getString("Id");
+             inicial = trips.get(i).getString("ClientId").substring(0,1);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        tvInicial.setText(inicial);
         title.setText(destination);
         subTitle.setText(origin);
+        idTrip.setText(id);
         return view;
 
     }

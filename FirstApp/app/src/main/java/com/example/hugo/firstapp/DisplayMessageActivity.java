@@ -32,11 +32,10 @@ import java.util.ArrayList;
 
 public class DisplayMessageActivity extends AppCompatActivity{
     private Context mContext;
-    private Activity mActivity;
-
     private CoordinatorLayout mCLayout;
-    private Button mButtonDo;
-    private String mJSONURLString = "http://eztrip.azurewebsites.net/api/trips/getTripsByDriver/11";
+    public String UserId;
+    private String mJSONURLString;
+    public static final String tripId="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +45,20 @@ public class DisplayMessageActivity extends AppCompatActivity{
         Intent intent = getIntent();
         String user = intent.getStringExtra(LoginActivity.Registered_UserName);
         setTitle(user);
+        UserId = intent.getStringExtra(LoginActivity.UserId);
 
         mContext = getApplicationContext();
-        mActivity = DisplayMessageActivity.this;
         mCLayout = findViewById(R.id.coordinator_layout);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mJSONURLString = "http://eztrip.azurewebsites.net/api/trips/getTripsByDriver/" + UserId;
         loadTrips();
     }
+
 
     public void setListItems(ArrayList<JSONObject> trips){
         CustomAdapter adapter = new CustomAdapter(mContext, trips);
@@ -61,14 +68,10 @@ public class DisplayMessageActivity extends AppCompatActivity{
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //CODIGO AQUI
                 int item = position;
-
-                TextView itemVal = lv.getChildAt(position).findViewById(R.id.textTitle);
-
-                //Object itemVal = lv.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Position: "+ item +" - Valor: "+ itemVal.getText(), Toast.LENGTH_LONG).show();
-
+                TextView itemVal = lv.getChildAt(position).findViewById(R.id.idText);
+                //Toast.makeText(getApplicationContext(),  "Id: "+ itemVal.getText(), Toast.LENGTH_LONG).show();
+                showTripDetails(itemVal.getText().toString());
             }
         });
     }
@@ -93,9 +96,9 @@ public class DisplayMessageActivity extends AppCompatActivity{
                             }
 
                         int n = trips.size();
-                        if (n>0) {
+                        //if (n>0) {
                             setListItems(trips);
-                        }
+                        //}
                     }
                 },
                 new Response.ErrorListener(){
@@ -112,4 +115,11 @@ public class DisplayMessageActivity extends AppCompatActivity{
         );
         requestQueue.add(jsonArrayRequest);
     }
+
+    private void showTripDetails (String id){
+        Intent intent = new Intent(this, TripDetailsActivity.class);
+        intent.putExtra(tripId, id);
+        startActivity(intent);
+    }
+
 }
