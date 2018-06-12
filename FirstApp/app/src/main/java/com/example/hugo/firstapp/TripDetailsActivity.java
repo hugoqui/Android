@@ -1,6 +1,11 @@
 package com.example.hugo.firstapp;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -59,7 +64,6 @@ public class TripDetailsActivity extends AppCompatActivity {
         showDetails();
     }
 
-
     public void showDetails() {
         JsonObjectRequest jsonTripRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -82,32 +86,42 @@ public class TripDetailsActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),  "Error en conexión ", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error en conexión ", Toast.LENGTH_LONG).show();
             }
         });
         queue.add(jsonTripRequest);
     }
 
-
-    public  void setTripCompleted(View view){
-        String completeUrl ="http://eztrip.azurewebsites.net/api/trips/tripCompleted/" + tripId;
+    public void setTripCompleted(View view) {
+        String completeUrl = "http://eztrip.azurewebsites.net/api/trips/tripCompleted/" + tripId;
         StringRequest tripCompleteRequest = new StringRequest(Request.Method.GET, completeUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (response.contains("ple")){
+                        if (response.contains("ple")) {
                             GoBack();
-                        }else{
-                            Toast.makeText(getApplicationContext(),  response, Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),  "Error en conexión en String Request", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error en conexión en String Request", Toast.LENGTH_LONG).show();
             }
         });
         queue.add(tripCompleteRequest);
+    }
+
+    @SuppressLint("MissingPermission")
+    public void callPassenger(View view) {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        String phoneToDial = phoneNumber.getText().toString().trim();
+        phoneToDial = phoneToDial.replace("-","");
+        phoneToDial = "tel:" + phoneToDial;
+        callIntent.setData(Uri.parse(phoneToDial));
+        startActivity(callIntent);
+
     }
 
     public void GoBack(){
